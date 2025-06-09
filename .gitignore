@@ -1,0 +1,23 @@
+# VS Code settings
+.vscode/
+
+# CLion (JetBrains IDEs) settings
+.idea/
+cmake-build-*/
+cmake-build-debug/
+cmake-build-release/
+*.iml
+
+# Build artifacts
+build/
+out/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# OS generated files
+.DS_Store
+Thumbs.db
