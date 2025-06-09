@@ -3,8 +3,6 @@
 #include <assert.h>
 
 
-int main() { 
-    int expected = 10;
-    int acutal = 4;
-    assert(expected == acutal);
-}
+int main() {
+    CHECK((2 > 5), "2 is NOT GREATER 5");
+ }

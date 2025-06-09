@@ -17,7 +17,7 @@ typedef struct Logger {
 
 void init_logger(Logger *logger, const char *file_name) {
     logger->log_file = fopen(file_name, "w");
-    CHECK(logger->log_file);
+    CHECK_PTR(logger->log_file);
     ERROR_CHECK(pthread_mutex_init(&logger->log_file_mutex, NULL), 0);
 }
 
@@ -26,7 +26,7 @@ void LOG(Logger *logger, const char *format, ...) {
     ERROR_CHECK(pthread_mutex_lock(&logger->log_file_mutex), EXPECTED);
     const time_t now = time(NULL);
     const struct tm *t = localtime(&now);
-    CHECK(logger->log_file);
+    CHECK_PTR(logger->log_file);
     fprintf(logger->log_file, "[%04d-%02d-%02d %02d:%02d:%02d]",
         t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
         t->tm_hour, t->tm_min, t->tm_sec
@@ -43,6 +43,6 @@ void LOG(Logger *logger, const char *format, ...) {
 
 void destroy_logger(Logger *logger) {
     ERROR_CHECK(pthread_mutex_destroy(&logger->log_file_mutex), EXPECTED);
-    CHECK(logger->log_file);
+    CHECK_PTR(logger->log_file);
     ERROR_CHECK(fclose(logger->log_file), EXPECTED);
 }
